@@ -21,7 +21,7 @@ export type CityAPIResponse = {
 
 export async function getCityByNameService(name: string): Promise<CityProps[] | []> {
   try {
-    const { data } = await api.get<CityAPIResponse>(`/weather?q=${name}`);
+    const { data } = await api.get<CityAPIResponse>(`/weather?q=${name}&appid=${process.env.EXPO_PUBLIC_WEATHER_APP_ID}`);
 
     const city = {
       id: data.id,
@@ -32,6 +32,7 @@ export async function getCityByNameService(name: string): Promise<CityProps[] | 
 
     return [city];
   } catch (error) {
+    console.log(error);
     return [];
   }
 }
